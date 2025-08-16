@@ -7,6 +7,7 @@ This application now includes a fully functional AI chat system powered by RubyL
 - **User Authentication**: Chats are associated with authenticated users
 - **AI Integration**: Powered by RubyLLM with support for multiple AI models
 - **Conversation History**: Persistent chat history stored in the database
+- **Chat Management**: Create new chats and delete existing ones
 - **Modern UI**: Beautiful Tailwind UI with your default color theme
 - **Responsive Design**: Works on desktop and mobile devices
 - **Real-time Updates**: Immediate feedback and loading states
@@ -20,6 +21,7 @@ This application now includes a fully functional AI chat system powered by RubyL
 ### 2. Start a New Chat
 - Click "New Chat" to begin a fresh conversation
 - Each chat is automatically associated with your user account
+- The system will redirect you to the new chat immediately
 
 ### 3. Send Messages
 - Type your message in the text area
@@ -31,6 +33,11 @@ This application now includes a fully functional AI chat system powered by RubyL
 - Click on any chat to continue the conversation
 - Messages are displayed with clear user/AI distinction
 
+### 5. Manage Chats
+- **Delete Chats**: Hover over any chat card to reveal a delete button
+- **Delete from Chat View**: Use the "Delete Chat" button in the chat header
+- **Confirmation**: All deletions require user confirmation to prevent accidents
+
 ## Technical Details
 
 ### Database Schema
@@ -39,7 +46,7 @@ This application now includes a fully functional AI chat system powered by RubyL
 - `users` table: Your existing user authentication system
 
 ### Controllers
-- `ChatsController`: Manages chat creation and display
+- `ChatsController`: Manages chat creation, display, and deletion
 - `MessagesController`: Handles message creation and AI responses
 
 ### Models
@@ -48,9 +55,16 @@ This application now includes a fully functional AI chat system powered by RubyL
 - `User`: Enhanced with chat associations
 
 ### Views
-- `chats/index.html.erb`: List of all user chats
-- `chats/show.html.erb`: Individual chat conversation view
+- `chats/index.html.erb`: List of all user chats with delete functionality
+- `chats/show.html.erb`: Individual chat conversation view with delete option
 - Enhanced dashboard with chat integration
+
+### Routes
+```ruby
+resources :chats, only: [:index, :show, :create, :destroy] do
+  resources :messages, only: [:create]
+end
+```
 
 ## Configuration
 
@@ -82,19 +96,22 @@ end
 - Colors: Modify Tailwind classes in the view files
 - Layout: Adjust the responsive grid and spacing
 - Icons: Replace SVG icons with your preferred set
+- Delete Button Styling: Customize the red delete button appearance
 
 ## Security Features
 
 - User authentication required for all chat operations
-- Users can only access their own chats
+- Users can only access and delete their own chats
 - CSRF protection enabled
 - Secure session management
+- Confirmation dialogs for destructive actions
 
 ## Performance Considerations
 
 - Messages are paginated and loaded efficiently
 - Database queries are optimized with proper associations
 - Loading states provide user feedback during AI processing
+- Delete operations are immediate with proper redirects
 
 ## Troubleshooting
 
@@ -103,12 +120,27 @@ end
 1. **AI Not Responding**: Check your API keys and internet connection
 2. **Chats Not Loading**: Ensure you're authenticated and have proper database access
 3. **Styling Issues**: Verify Tailwind CSS is properly loaded
+4. **Delete Not Working**: Check browser console for JavaScript errors
 
 ### Debug Mode
 Enable debug logging in `config/environments/development.rb`:
 ```ruby
 config.log_level = :debug
 ```
+
+## Recent Updates
+
+### Chat Management Features (Latest)
+- **Delete Functionality**: Added delete buttons to all chat views
+- **Improved New Chat**: Fixed new chat button functionality
+- **Better UX**: Delete buttons appear on hover with confirmation dialogs
+- **Consistent Styling**: Red delete buttons with proper hover states
+
+### Technical Improvements
+- Updated to Rails 7+ Turbo syntax for all forms
+- Proper `button_to` implementation for delete actions
+- Enhanced controller actions with proper error handling
+- Improved routing configuration
 
 ## Future Enhancements
 
@@ -118,6 +150,8 @@ config.log_level = :debug
 - Advanced AI model selection
 - Conversation search and filtering
 - Chat templates and presets
+- Bulk chat operations
+- Chat archiving system
 
 ---
 

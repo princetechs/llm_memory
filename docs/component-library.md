@@ -291,6 +291,52 @@ Card with enhanced hover effects.
 
 **CSS Class**: `.card-hover` applies hover transform and shadow effects.
 
+## 🗑️ **Action Components**
+
+### **Delete Button**
+Destructive action button with confirmation dialog.
+
+```html
+<!-- Small circular delete button (for cards) -->
+<%= button_to chat_path(chat), 
+    class: "w-8 h-8 bg-red-100 hover:bg-red-200 text-red-600 rounded-full flex items-center justify-center transition-colors duration-200 opacity-0 group-hover:opacity-100",
+    data: { 
+      turbo_confirm: "Are you sure you want to delete this chat?",
+      turbo_method: :delete
+    } do %>
+  <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path>
+  </svg>
+<% end %>
+
+<!-- Standard delete button (for headers) -->
+<%= button_to chat_path(@chat), 
+    class: "inline-flex items-center px-4 py-2 border border-red-200 text-red-700 bg-white/80 backdrop-blur-sm rounded-xl hover:bg-red-50 hover:border-red-300 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500 transition-all duration-200",
+    data: { 
+      turbo_confirm: "Are you sure you want to delete this chat?",
+      turbo_method: :delete
+    } do %>
+  <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path>
+  </svg>
+  Delete Chat
+<% end %>
+```
+
+**Features**:
+- **Confirmation Dialog**: Uses `turbo_confirm` for user confirmation
+- **Proper Method**: Uses `data: { turbo_method: :delete }` for Rails 7+ compatibility
+- **Hover Effects**: Red color scheme with hover state changes
+- **Responsive Design**: Works on all device sizes
+- **Accessibility**: Clear visual indication of destructive action
+
+**Usage Guidelines**:
+- Use small circular buttons for card-based layouts
+- Use standard buttons for header actions
+- Always include confirmation dialogs for destructive actions
+- Position delete buttons to avoid accidental clicks
+- Use consistent red color scheme for all delete actions
+
 ## 🔧 **Utility Components**
 
 ### **Divider**
@@ -357,5 +403,5 @@ Animated loading indicator.
 ---
 
 **Last Updated**: <%= Date.current.strftime("%B %d, %Y") %>
-**Version**: 1.0.0
+**Version**: 1.1.0
 **Next Review**: <%= (Date.current + 30.days).strftime("%B %d, %Y") %>

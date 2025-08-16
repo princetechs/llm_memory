@@ -1,10 +1,26 @@
 import { Controller } from "@hotwired/stimulus"
 
 export default class extends Controller {
+  connect() {
+    console.log("ChatForm controller connected")
+  }
+  
   submit(event) {
-    const form = this.element
-    const submitButton = form.querySelector('input[type="submit"], button[type="submit"]')
-    const textarea = form.querySelector('textarea')
+    const textarea = this.element.querySelector('textarea')
+    const submitButton = this.element.querySelector('input[type="submit"], button[type="submit"]')
+    const loadingOverlay = document.getElementById('loading-overlay')
+    
+    // Check if textarea has content
+    if (!textarea.value.trim()) {
+      console.log("Textarea is empty, preventing submission")
+      event.preventDefault()
+      return false
+    }
+    
+    // Show loading overlay
+    if (loadingOverlay) {
+      loadingOverlay.classList.remove('hidden')
+    }
     
     // Disable form during submission
     submitButton.disabled = true
@@ -14,12 +30,7 @@ export default class extends Controller {
     submitButton.textContent = "Sending..."
     submitButton.classList.add("opacity-75", "cursor-not-allowed")
     
-    // Re-enable after a short delay (form will redirect anyway)
-    setTimeout(() => {
-      submitButton.disabled = false
-      textarea.disabled = false
-      submitButton.textContent = "Send"
-      submitButton.classList.remove("opacity-75", "cursor-not-allowed")
-    }, 1000)
+    // Allow form to submit naturally
+    return true
   }
 }

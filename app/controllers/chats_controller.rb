@@ -1,5 +1,5 @@
 class ChatsController < ApplicationController
-  before_action :set_chat, only: [:show]
+  before_action :set_chat, only: [ :show, :destroy ]
 
   def index
     @chats = Current.user.chats.order(created_at: :desc)
@@ -10,8 +10,13 @@ class ChatsController < ApplicationController
   end
 
   def create
-    @chat = Current.user.chats.create!(model_id: 'gpt-4o')
+    @chat = Current.user.chats.create!(model_id: "gpt-4o")
     redirect_to @chat
+  end
+
+  def destroy
+    @chat.destroy
+    redirect_to chats_path, notice: "Chat deleted successfully"
   end
 
   private

@@ -14,6 +14,9 @@ Welcome to the comprehensive documentation for the Llm Memory application. This 
 - [**Authentication System**](./authentication-system.md) - User management, sessions, and security implementation
 - [**Database Schema**](./database-schema.md) - Data models and relationships
 
+### 🤖 **AI Chat System**
+- [**Chat Page Integration**](./chat_page_intrigation.md) - Complete AI chat system documentation and implementation details
+
 ### 🚀 **Getting Started**
 - [**Development Setup**](./development-setup.md) - How to set up and run the application locally
 - [**Deployment Guide**](./deployment.md) - Production deployment instructions
@@ -28,7 +31,8 @@ Welcome to the comprehensive documentation for the Llm Memory application. This 
 1. **Read the [UI Style Guide](./ui-style-guide.md)** to understand the design system
 2. **Check [Component Library](./component-library.md)** for reusable UI patterns
 3. **Review [Layout Patterns](./layout-patterns.md)** for page structure guidelines
-4. **Follow [Development Setup](./development-setup.md)** to get started
+4. **Explore [Chat System](./chat_page_intrigation.md)** for AI chat functionality
+5. **Follow [Development Setup](./development-setup.md)** to get started
 
 ## 🔄 **Documentation Updates**
 
@@ -47,8 +51,22 @@ This documentation is maintained alongside the codebase. When making UI changes:
 - **Consistent Formatting**: Follow the established markdown structure
 - **Regular Updates**: Keep documentation in sync with code changes
 
+## 🆕 **Recent Updates (v1.1.0)**
+
+### Chat Management System
+- **Delete Functionality**: Added delete buttons to all chat views
+- **Improved New Chat**: Fixed new chat button functionality
+- **Better UX**: Delete buttons with confirmation dialogs
+- **Rails 7+ Compatibility**: Updated all forms to use proper Turbo syntax
+
+### Documentation Enhancements
+- Updated component library with new delete button components
+- Enhanced chat system documentation with management features
+- Added technical implementation details for recent changes
+- Updated UI changelog with version 1.1.0 details
+
 ---
 
 **Last Updated**: <%= Date.current.strftime("%B %d, %Y") %>
-**Version**: 1.0.0
+**Version**: 1.1.0
 **Maintained By**: Development Team

@@ -5,7 +5,7 @@ Rails.application.routes.draw do
   get "dashboard" => "dashboard#index", as: :dashboard
   
   # Chat routes
-  resources :chats, only: [:index, :show, :create] do
+  resources :chats, only: [:index, :show, :create, :destroy] do
     resources :messages, only: [:create]
   end
 
