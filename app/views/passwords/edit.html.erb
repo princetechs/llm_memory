@@ -1,21 +1,106 @@
-<div class="mx-auto md:w-2/3 w-full">
-  <% if alert = flash[:alert] %>
-    <p class="py-2 px-3 bg-red-50 mb-5 text-red-500 font-medium rounded-lg inline-block" id="alert"><%= alert %></p>
-  <% end %>
+<div class="min-h-screen flex items-center justify-center bg-gradient-to-br from-neutral-50 via-warning-50 to-error-50 p-4">
+  <div class="w-full max-w-md">
+    <div class="bg-white/80 backdrop-blur-sm rounded-3xl shadow-2xl border border-white/20 overflow-hidden">
+      <!-- Header with AI Theme -->
+      <div class="bg-gradient-to-r from-warning-600 via-warning-700 to-error-600 px-8 py-8 text-center relative overflow-hidden">
+        <!-- Background Pattern -->
+        <div class="absolute inset-0 opacity-10">
+          <div class="absolute top-0 left-0 w-32 h-32 bg-white rounded-full -translate-x-16 -translate-y-16"></div>
+          <div class="absolute top-0 right-0 w-24 h-24 bg-white rounded-full translate-x-12 -translate-y-12"></div>
+          <div class="absolute bottom-0 left-0 w-20 h-20 bg-white rounded-full -translate-x-10 translate-y-10"></div>
+        </div>
+        
+        <!-- AI Icon -->
+        <div class="relative z-10 mb-4">
+          <div class="inline-flex items-center justify-center w-16 h-16 bg-white/20 rounded-2xl backdrop-blur-sm">
+            <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"></path>
+            </svg>
+          </div>
+        </div>
+        
+        <h1 class="text-3xl font-bold text-white mb-2 font-ai">Set New Password</h1>
+        <p class="text-warning-100 text-lg">Choose a secure password for your account</p>
+      </div>
 
-  <h1 class="font-bold text-4xl">Update your password</h1>
+      <!-- Form -->
+      <div class="px-8 py-8">
+        <%= form_with url: password_path(params[:token]), method: :patch, class: "space-y-6" do |form| %>
+          <div>
+            <label for="password" class="block text-sm font-medium text-neutral-700 mb-3">
+              New Password
+            </label>
+            <div class="relative group">
+              <div class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
+                <svg class="w-5 h-5 text-neutral-400 group-focus-within:text-warning-500 transition-colors duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"></path>
+                </svg>
+              </div>
+              <%= form.password_field :password, 
+                  id: "password",
+                  required: true,
+                  class: "block w-full pl-12 pr-4 py-4 border border-neutral-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-warning-500 focus:border-transparent transition-all duration-200 bg-white/50 backdrop-blur-sm hover:bg-white/70 focus:bg-white",
+                  placeholder: "Enter your new password" %>
+            </div>
+            <p class="mt-2 text-xs text-neutral-500">Password must be at least 6 characters long</p>
+          </div>
 
-  <%= form_with url: password_path(params[:token]), method: :put, class: "contents" do |form| %>
-    <div class="my-5">
-      <%= form.password_field :password, required: true, autocomplete: "new-password", placeholder: "Enter new password", maxlength: 72, class: "block shadow-sm rounded-md border border-gray-400 focus:outline-solid focus:outline-blue-600 px-3 py-2 mt-2 w-full" %>
+          <div>
+            <label for="password_confirmation" class="block text-sm font-medium text-neutral-700 mb-3">
+              Confirm New Password
+            </label>
+            <div class="relative group">
+              <div class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
+                <svg class="w-5 h-5 text-neutral-400 group-focus-within:text-warning-500 transition-colors duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                </svg>
+              </div>
+              <%= form.password_field :password_confirmation, 
+                  id: "password_confirmation",
+                  required: true,
+                  class: "block w-full pl-12 pr-4 py-4 border border-neutral-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-warning-500 focus:border-transparent transition-all duration-200 bg-white/50 backdrop-blur-sm hover:bg-white/70 focus:bg-white",
+                  placeholder: "Confirm your new password" %>
+            </div>
+          </div>
+
+          <div>
+            <%= form.submit "Update Password", 
+                class: "w-full flex justify-center py-4 px-6 border border-transparent rounded-xl shadow-lg text-base font-semibold text-white bg-gradient-to-r from-warning-600 to-error-600 hover:from-warning-700 hover:to-error-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-warning-500 transition-all duration-200 transform hover:scale-105 hover:shadow-xl active:scale-95" %>
+          </div>
+        <% end %>
+
+        <!-- Divider -->
+        <div class="mt-8">
+          <div class="relative">
+            <div class="absolute inset-0 flex items-center">
+              <div class="w-full border-t border-neutral-200"></div>
+            </div>
+            <div class="relative flex justify-center text-sm">
+              <span class="px-4 bg-white/80 text-neutral-500 font-medium">Need help?</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Help Links -->
+        <div class="mt-6 space-y-3">
+          <%= link_to new_password_path, 
+              class: "w-full flex justify-center py-4 px-6 border border-neutral-200 rounded-xl shadow-sm text-base font-medium text-neutral-700 bg-white/80 backdrop-blur-sm hover:bg-white hover:border-warning-300 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-warning-500 transition-all duration-200 hover:shadow-md" do %>
+            Request New Reset Link
+          <% end %>
+          
+          <%= link_to new_session_path, 
+              class: "w-full flex justify-center py-4 px-6 border border-neutral-200 rounded-xl shadow-sm text-base font-medium text-neutral-700 bg-white/80 backdrop-blur-sm hover:bg-white hover:border-warning-300 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-warning-500 transition-all duration-200 hover:shadow-md" do %>
+            Back to Sign In
+          <% end %>
+        </div>
+      </div>
     </div>
 
-    <div class="my-5">
-      <%= form.password_field :password_confirmation, required: true, autocomplete: "new-password", placeholder: "Repeat new password", maxlength: 72, class: "block shadow-sm rounded-md border border-gray-400 focus:outline-solid focus:outline-blue-600 px-3 py-2 mt-2 w-full" %>
+    <!-- Footer -->
+    <div class="mt-8 text-center">
+      <p class="text-sm text-neutral-500">
+        © 2024 Llm Memory. Powered by AI.
+      </p>
     </div>
-
-    <div class="inline">
-      <%= form.submit "Save", class: "w-full sm:w-auto text-center rounded-md px-3.5 py-2.5 bg-blue-600 hover:bg-blue-500 text-white inline-block font-medium cursor-pointer" %>
-    </div>
-  <% end %>
+  </div>
 </div>
