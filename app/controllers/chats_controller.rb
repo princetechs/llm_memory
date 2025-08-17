@@ -7,7 +7,6 @@ class ChatsController < ApplicationController
 
   def show
     @messages = @chat.messages.order(created_at: :asc)
-    # hi swastika
   end
 
   def create
