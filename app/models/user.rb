@@ -10,4 +10,21 @@ class User < ApplicationRecord
             uniqueness: { case_sensitive: false }
   validates :password, presence: true, length: { minimum: 6, message: "must be at least 6 characters" }
   validates :password_confirmation, presence: true, if: -> { password.present? }
+
+  # Memory-related methods
+  def memory_service
+    @memory_service ||= MemoryService.new(self)
+  end
+
+  def profile_summary
+    memory_service.get_profile_summary
+  end
+
+  def memory_stats
+    memory_service.get_stats
+  end
+
+  def relevant_memories(query: nil, category: nil, limit: 10)
+    memory_service.get_relevant_memories(query: query, category: category, limit: limit)
+  end
 end

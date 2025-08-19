@@ -9,6 +9,22 @@ Rails.application.routes.draw do
     resources :messages, only: [:create]
   end
 
+  # Memory management routes
+  resources :memories, only: [:index, :show] do
+    member do
+      patch :update_importance
+    end
+    collection do
+      get :search
+      get :export
+    end
+  end
+
+  # Debug routes for memory testing
+  get "debug/memory_status" => "debug#memory_status", as: :debug_memory_status
+  get "debug/test_memory_storage" => "debug#test_memory_storage", as: :debug_test_memory_storage
+  delete "debug/clear_memories" => "debug#clear_memories", as: :debug_clear_memories
+
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
   # Reveal health status on /up that returns 200 if the app boots with no exceptions, otherwise 500.

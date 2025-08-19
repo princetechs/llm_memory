@@ -16,6 +16,17 @@
         </div>
         
         <div class="flex items-center space-x-4">
+          <nav class="flex items-center space-x-4">
+            <%= link_to dashboard_path, class: "text-neutral-700 hover:text-neutral-900 px-3 py-2 rounded-lg hover:bg-white/50 transition-colors duration-200" do %>
+              Dashboard
+            <% end %>
+            <%= link_to chats_path, class: "text-neutral-700 hover:text-neutral-900 px-3 py-2 rounded-lg hover:bg-white/50 transition-colors duration-200" do %>
+              Chats
+            <% end %>
+            <%= link_to memories_path, class: "text-neutral-700 hover:text-neutral-900 px-3 py-2 rounded-lg hover:bg-white/50 transition-colors duration-200" do %>
+              Memories
+            <% end %>
+          </nav>
           <div class="text-right">
             <p class="text-sm text-neutral-600">Welcome back</p>
             <p class="text-neutral-900 font-medium"><%= @user.email_address %></p>
@@ -56,7 +67,7 @@
           </div>
           <div class="ml-4">
             <p class="text-sm font-medium text-neutral-600">Total Memories</p>
-            <p class="text-3xl font-bold text-neutral-900">0</p>
+            <p class="text-3xl font-bold text-neutral-900"><%= @memory_stats[:total_memories] %></p>
           </div>
         </div>
       </div>
@@ -70,7 +81,7 @@
           </div>
           <div class="ml-4">
             <p class="text-sm font-medium text-neutral-600">AI Interactions</p>
-            <p class="text-3xl font-bold text-neutral-900">0</p>
+            <p class="text-3xl font-bold text-neutral-900"><%= @user.chats.count %></p>
           </div>
         </div>
       </div>
@@ -108,7 +119,7 @@
     <div class="bg-white/80 backdrop-blur-sm rounded-3xl border border-white/20 p-8 shadow-lg mb-12">
       <h3 class="text-2xl font-bold text-neutral-900 mb-6 font-ai">Quick Actions</h3>
       <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-        <button class="group p-6 bg-gradient-to-br from-primary-50 to-primary-100 border border-primary-200 rounded-2xl hover:from-primary-100 hover:to-primary-200 transition-all duration-200 transform hover:scale-105 hover:shadow-lg">
+        <%= link_to chats_path, class: "group p-6 bg-gradient-to-br from-primary-50 to-primary-100 border border-primary-200 rounded-2xl hover:from-primary-100 hover:to-primary-200 transition-all duration-200 transform hover:scale-105 hover:shadow-lg" do %>
           <div class="flex items-center justify-center w-12 h-12 bg-primary-500 rounded-xl mb-4 group-hover:bg-primary-600 transition-colors duration-200">
             <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"></path>
@@ -116,9 +127,9 @@
           </div>
           <h4 class="text-lg font-semibold text-neutral-900 mb-2">Create New Memory</h4>
           <p class="text-neutral-600 text-sm">Store new information with AI assistance</p>
-        </button>
+        <% end %>
         
-        <button class="group p-6 bg-gradient-to-br from-secondary-50 to-secondary-100 border border-secondary-200 rounded-2xl hover:from-secondary-100 hover:to-secondary-200 transition-all duration-200 transform hover:scale-105 hover:shadow-lg">
+        <%= link_to memories_path, class: "group p-6 bg-gradient-to-br from-secondary-50 to-secondary-100 border border-secondary-200 rounded-2xl hover:from-secondary-100 hover:to-secondary-200 transition-all duration-200 transform hover:scale-105 hover:shadow-lg" do %>
           <div class="flex items-center justify-center w-12 h-12 bg-secondary-500 rounded-xl mb-4 group-hover:bg-secondary-600 transition-colors duration-200">
             <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
@@ -126,7 +137,7 @@
           </div>
           <h4 class="text-lg font-semibold text-neutral-900 mb-2">Search Memories</h4>
           <p class="text-neutral-600 text-sm">Find information using natural language</p>
-        </button>
+        <% end %>
 
         <%= link_to chats_path, class: "group p-6 bg-gradient-to-br from-accent-50 to-accent-100 border border-accent-200 rounded-2xl hover:from-accent-100 hover:to-accent-200 transition-all duration-200 transform hover:scale-105 hover:shadow-lg" do %>
           <div class="flex items-center justify-center w-12 h-12 bg-accent-500 rounded-xl mb-4 group-hover:bg-accent-600 transition-colors duration-200">
@@ -142,16 +153,57 @@
 
     <!-- Recent Activity -->
     <div class="bg-white/80 backdrop-blur-sm rounded-3xl border border-white/20 p-8 shadow-lg">
-      <h3 class="text-2xl font-bold text-neutral-900 mb-6 font-ai">Recent Activity</h3>
-      <div class="text-center py-12">
-        <div class="w-24 h-24 bg-neutral-100 rounded-full flex items-center justify-center mx-auto mb-4">
-          <svg class="w-12 h-12 text-neutral-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
-          </svg>
-        </div>
-        <h4 class="text-lg font-medium text-neutral-600 mb-2">No activity yet</h4>
-        <p class="text-neutral-500">Start creating memories to see your activity here</p>
+      <div class="flex items-center justify-between mb-6">
+        <h3 class="text-2xl font-bold text-neutral-900 font-ai">Recent Activity</h3>
+        <%= link_to memories_path, class: "text-primary-600 hover:text-primary-700 font-medium" do %>
+          View All Memories →
+        <% end %>
       </div>
+      
+      <% if @recent_memories.any? %>
+        <div class="space-y-4">
+          <% @recent_memories.each do |memory| %>
+            <div class="flex items-start space-x-4 p-4 bg-neutral-50/50 rounded-xl border border-neutral-200/50">
+              <div class="flex-shrink-0">
+                <div class="w-8 h-8 rounded-full flex items-center justify-center text-xs font-medium
+                  <%= case memory['importance']
+                      when 'high' then 'bg-red-100 text-red-700'
+                      when 'medium' then 'bg-yellow-100 text-yellow-700'
+                      else 'bg-green-100 text-green-700'
+                      end %>">
+                  <%= memory['importance'].first.upcase %>
+                </div>
+              </div>
+              <div class="flex-1 min-w-0">
+                <p class="text-sm text-neutral-900 font-medium"><%= memory['content'] %></p>
+                <div class="flex items-center space-x-2 mt-1">
+                  <span class="inline-flex items-center px-2 py-1 rounded-full text-xs font-medium bg-neutral-100 text-neutral-700">
+                    <%= memory['category'] %>
+                  </span>
+                  <% memory['tags'].first(3).each do |tag| %>
+                    <span class="inline-flex items-center px-2 py-1 rounded-full text-xs font-medium bg-primary-100 text-primary-700">
+                      <%= tag %>
+                    </span>
+                  <% end %>
+                </div>
+                <p class="text-xs text-neutral-500 mt-1">
+                  <%= time_ago_in_words(Time.parse(memory['created_at'])) %> ago
+                </p>
+              </div>
+            </div>
+          <% end %>
+        </div>
+      <% else %>
+        <div class="text-center py-12">
+          <div class="w-24 h-24 bg-neutral-100 rounded-full flex items-center justify-center mx-auto mb-4">
+            <svg class="w-12 h-12 text-neutral-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
+            </svg>
+          </div>
+          <h4 class="text-lg font-medium text-neutral-600 mb-2">No activity yet</h4>
+          <p class="text-neutral-500">Start chatting with AI to create memories</p>
+        </div>
+      <% end %>
     </div>
   </div>
 </div>

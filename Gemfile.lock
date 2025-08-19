@@ -1,3 +1,8 @@
+PATH
+  remote: /Users/sandip/personal/rubylm/r2lm
+  specs:
+    r2lm (0.1.0)
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -417,6 +422,7 @@ DEPENDENCIES
   pg
   propshaft
   puma (>= 5.0)
+  r2lm!
   rails (~> 8.0.2, >= 8.0.2.1)
   rubocop-rails-omakase
   ruby_llm

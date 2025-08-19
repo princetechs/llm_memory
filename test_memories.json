@@ -1,0 +1,40 @@
+{
+  "memories": [
+    {
+      "content": "Test user's name is Alice",
+      "category": "name",
+      "importance": "high",
+      "tags": [
+        "profile",
+        "long_term",
+        "user_999"
+      ],
+      "created_at": "2025-08-20T01:30:30+05:30",
+      "id": "8f2b4a5c-3197-4e6e-aec3-a71e00c881b7"
+    },
+    {
+      "content": "Test user works as a designer",
+      "category": "personal_facts",
+      "importance": "high",
+      "tags": [
+        "profile",
+        "long_term",
+        "user_999"
+      ],
+      "created_at": "2025-08-20T01:30:30+05:30",
+      "id": "86972755-944d-41cf-baee-59d42eb4e2c9"
+    },
+    {
+      "content": "Test user loves Ruby",
+      "category": "preferences",
+      "importance": "medium",
+      "tags": [
+        "profile",
+        "long_term",
+        "user_999"
+      ],
+      "created_at": "2025-08-20T01:30:30+05:30",
+      "id": "db95de11-03b2-4150-9da9-093f713a801e"
+    }
+  ]
+}
