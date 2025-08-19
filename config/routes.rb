@@ -9,16 +9,7 @@ Rails.application.routes.draw do
     resources :messages, only: [:create]
   end
 
-  # Memory management routes
-  resources :memories, only: [:index, :show] do
-    member do
-      patch :update_importance
-    end
-    collection do
-      get :search
-      get :export
-    end
-  end
+
 
   # Debug routes for memory testing
   get "debug/memory_status" => "debug#memory_status", as: :debug_memory_status

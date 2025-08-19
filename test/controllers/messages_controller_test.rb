@@ -28,7 +28,7 @@ class MessagesControllerTest < ActionDispatch::IntegrationTest
     
     # Check that memories were stored
     memory_service = MemoryService.new(@user)
-    memories = memory_service.get_relevant_memories(query: "programming")
+    memories = memory_service.memory.get
     assert_equal 1, memories.length
     assert_equal "User enjoys programming", memories.first['content']
   end
@@ -52,7 +52,7 @@ class MessagesControllerTest < ActionDispatch::IntegrationTest
     
     # Check that fallback memory was stored
     memory_service = MemoryService.new(@user)
-    memories = memory_service.get_relevant_memories(category: "conversation")
+    memories = memory_service.memory.get
     assert_equal 1, memories.length
     assert_includes memories.first['content'], "AI response (JSON parsing failed)"
   end

@@ -3,9 +3,9 @@ class DebugController < ApplicationController
 
   def memory_status
     @memory_status = @memory_service.debug_memory_status
-    @memories = @memory_service.get_relevant_memories(limit: 20)
+    @memories = @memory_service.memory.get.first(20)
     @stats = @memory_service.get_stats
-    @profile = @memory_service.get_profile_summary
+    @profile = @memory_service.get_profile_memories
   end
 
   def test_memory_storage
@@ -19,17 +19,11 @@ class DebugController < ApplicationController
 
     results = []
     test_memories.each do |memory|
-      case memory[:category]
-      when 'preferences'
-        result = @memory_service.store_preference(memory[:content], memory[:importance])
-      when 'personal_facts'
-        result = @memory_service.store_personal_fact(memory[:content], memory[:importance])
-      when 'goals'
-        result = @memory_service.store_goal(memory[:content], memory[:importance])
-      when 'skills'
-        result = @memory_service.store_skill(memory[:content], memory[:importance])
-      end
-      
+      result = @memory_service.store(
+        memory[:content], 
+        category: memory[:category], 
+        importance: memory[:importance]
+      )
       results << { memory: memory, result: result, success: !result.nil? }
     end
 

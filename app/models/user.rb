@@ -17,7 +17,7 @@ class User < ApplicationRecord
   end
 
   def profile_summary
-    memory_service.get_profile_summary
+    memory_service.get_profile_memories
   end
 
   def memory_stats
@@ -25,6 +25,6 @@ class User < ApplicationRecord
   end
 
   def relevant_memories(query: nil, category: nil, limit: 10)
-    memory_service.get_relevant_memories(query: query, category: category, limit: limit)
+    memory_service.memory.get.first(limit)
   end
 end
