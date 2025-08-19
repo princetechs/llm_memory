@@ -4,8 +4,8 @@ class MemoryService
   def initialize(user)
     @user = user
     ensure_storage_directory
-    # Use the new ProfileMemory from r2lm gem
-    @memory = R2lm::ProfileMemory.new(user_memory_path, user_id: user.id)
+    # Use the new factory-based ProfileMemory from r2lm gem
+    @memory = R2lm.profile(user_memory_path, user_id: user.id)
     Rails.logger.info "MemoryService initialized for user #{user.id} at #{user_memory_path}"
   end
 
